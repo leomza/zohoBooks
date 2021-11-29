@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Work</title>
+    <link rel="shortcut icon" href="../img/letsWork.jpg" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <nav class="top-menu">
+        <h1 class="top-menu__title">NEW INVOICE</h1>
+        <a class="top-menu__button" onclick="redirectInvoice()">Go to invoices</a>
+        <a class="top-menu__button" href="../01-main.html">Go to main page</a>
+    </nav>
+
+    <form class="form register" id="formInvoice">
+        <h3>Enter the invoice data</h3>
+
+        <div class="form__wrapper wrapper__register">
+            <label for="description">Invoice description:</label>
+            <input type="text" name="description" required>
+        </div>
+
+        <div class="form__wrapper wrapper__register">
+            <label for="total">Total to pay:</label>
+            <input type="number" name="total" min="0" required>
+        </div>
+
+        <input class="form__submit--newclient" type="submit" value="Create">
+    </form>
+
+    <script src="04-newInvoice.js"></script>
+</body>
+
+</html>

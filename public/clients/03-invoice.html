@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Work</title>
+    <link rel="shortcut icon" href="../img/letsWork.jpg" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body onload="renderInvoices()">
+    <nav class="top-menu">
+        <h1 class="top-menu__title">CLIENTS INVOICE</h1>
+        <a class="top-menu__button" href="01-clients.html">Go to clients</a>
+        <a class="top-menu__button" href="../01-main.html">Go to main page</a>
+    </nav>
+    <h1>Clients Invoice</h1>
+    <a class="top-menu__button" onclick="redirectNewInvoice()">Create a new invoice</a>
+
+    <div id="root"></div>
+
+    <script src="03-invoice.js"></script>
+</body>
+
+</html>
