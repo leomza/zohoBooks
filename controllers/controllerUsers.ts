@@ -18,8 +18,3 @@ export async function getToken(req, res) {
         res.status(500).send(error.message);
     }
 }
-
-
-//PARA CREAR UN USUARIO
-/* const contactResponse = await axios.post(`https://books.zoho.eu/api/v3/contacts?organization_id=20079813562`, contact, { headers: { "Authorization": `Zoho-oauthtoken ${access_token}` } });
-console.log(contactResponse) */
