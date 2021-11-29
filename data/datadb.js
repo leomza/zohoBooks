@@ -1,10 +1,11 @@
 const mysql = require('mysql')
+require('dotenv').config()
 
 const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: '123456',
-  database: 'letswork'
+  password: process.env.DATA_BASE_PASSWORD,
+  database: process.env.DATA_BASE_NAME
 })
 
 const query = queryText => {
