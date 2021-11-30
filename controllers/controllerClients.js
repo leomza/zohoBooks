@@ -41,7 +41,7 @@ require("dotenv").config();
 var zohoApi_1 = require("../apis/zohoApi");
 var _a = require("../data/datadb"), query = _a.query, addClient = _a.addClient, getAllClients = _a.getAllClients;
 //Create the table in SQL if is not exist
-query("CREATE TABLE IF NOT EXISTS clients (\n        contact_id      VARCHAR(255) NOT NULL,\n        contact_name    VARCHAR(255) NOT NULL,\n        company_name    VARCHAR(255) NOT NULL,\n        created_date  DATE DEFAULT (CURRENT_DATE),\n        PRIMARY KEY(contact_id))").then(function () { return console.log("Table Clients Created"); })["catch"](function (err) { return console.log(err); });
+query("CREATE TABLE IF NOT EXISTS clients (\n        contact_id      VARCHAR(255) NOT NULL,\n        contact_name    VARCHAR(255) NOT NULL,\n        company_name    VARCHAR(255) NOT NULL,\n        organization_id    VARCHAR(255) NOT NULL,\n        created_date  DATE DEFAULT (CURRENT_DATE),\n        PRIMARY KEY(contact_id))").then(function () { return console.log("Table Clients Created"); })["catch"](function (err) { return console.log(err); });
 function createClient(req, res) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, contactName, companyName, contact, newClient, error_1;
@@ -60,7 +60,7 @@ function createClient(req, res) {
                 case 1:
                     newClient = _b.sent();
                     //Add the client in SQL
-                    return [4 /*yield*/, addClient(newClient.data.contact.contact_id, contactName, companyName)];
+                    return [4 /*yield*/, addClient(newClient.data.contact.contact_id, contactName, companyName, req.organizationId)];
                 case 2:
                     //Add the client in SQL
                     _b.sent();

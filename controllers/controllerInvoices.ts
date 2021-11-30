@@ -8,6 +8,7 @@ query(
     `CREATE TABLE IF NOT EXISTS invoices (
         invoice_id      VARCHAR(255) NOT NULL,
         contact_id    VARCHAR(255) NOT NULL,
+        organization_id    VARCHAR(255) NOT NULL,
         total    INT(200) NOT NULL,
         created_date  DATE DEFAULT (CURRENT_DATE),
         PRIMARY KEY(invoice_id))`
@@ -34,7 +35,7 @@ export async function createInvoice(req, res) {
         //Add the invoice to the App Zoho Books
         const newInvoice = await new ZohoApi(req.token, req.organizationId).createInvoice("invoices", invoice)
         //Add the invoice in SQL
-        await addInvoice(newInvoice.data.invoice.invoice_id, clientId, total);
+        await addInvoice(newInvoice.data.invoice.invoice_id, clientId, total, req.organizationId);
         res.end()
     } catch (error) {
         console.error(error);
@@ -44,7 +45,7 @@ export async function createInvoice(req, res) {
 
 export async function allInvoices(req, res) {
     try {
-        const invoicesInfo = await new ZohoApi(req.token).getAllInvoices("invoices")
+        const invoicesInfo = await new ZohoApi(req.token, req.organizationId).getAllInvoices("invoices")
         res.send(invoicesInfo.data)
     } catch (error) {
         console.error(error);

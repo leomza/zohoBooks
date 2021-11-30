@@ -45,14 +45,14 @@ var getAllClients = function getAllClients() {
   });
 };
 
-var addClient = function addClient(contactId, contactName, companyName) {
+var addClient = function addClient(contactId, contactName, companyName, organizationId) {
   var addedClient;
   return regeneratorRuntime.async(function addClient$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.next = 2;
-          return regeneratorRuntime.awrap(query("INSERT INTO clients (contact_id, contact_name, company_name) VALUES ('".concat(contactId, "', '").concat(contactName, "', '").concat(companyName, "')")));
+          return regeneratorRuntime.awrap(query("INSERT INTO clients (contact_id, contact_name, company_name, organization_id) VALUES ('".concat(contactId, "', '").concat(contactName, "', '").concat(companyName, "', '").concat(organizationId, "')")));
 
         case 2:
           addedClient = _context2.sent;
@@ -67,14 +67,14 @@ var addClient = function addClient(contactId, contactName, companyName) {
 }; //Invoices:
 
 
-var addInvoice = function addInvoice(contactId, contactName, companyName) {
+var addInvoice = function addInvoice(contactId, contactName, companyName, organizationId) {
   var addedClient;
   return regeneratorRuntime.async(function addInvoice$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.next = 2;
-          return regeneratorRuntime.awrap(query("INSERT INTO invoices (invoice_id, contact_id, total) VALUES ('".concat(contactId, "', '").concat(contactName, "', '").concat(companyName, "')")));
+          return regeneratorRuntime.awrap(query("INSERT INTO invoices (invoice_id, contact_id, total, organization_id) VALUES ('".concat(contactId, "', '").concat(contactName, "', '").concat(companyName, "', '").concat(organizationId, "')")));
 
         case 2:
           addedClient = _context3.sent;

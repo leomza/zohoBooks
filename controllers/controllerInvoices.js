@@ -41,7 +41,7 @@ require("dotenv").config();
 var zohoApi_1 = require("../apis/zohoApi");
 var _a = require("../data/datadb"), query = _a.query, addInvoice = _a.addInvoice;
 //Create the table in SQL if is not exist
-query("CREATE TABLE IF NOT EXISTS invoices (\n        invoice_id      VARCHAR(255) NOT NULL,\n        contact_id    VARCHAR(255) NOT NULL,\n        total    INT(200) NOT NULL,\n        created_date  DATE DEFAULT (CURRENT_DATE),\n        PRIMARY KEY(invoice_id))").then(function () { return console.log("Table Invoice Created"); })["catch"](function (err) { return console.log(err); });
+query("CREATE TABLE IF NOT EXISTS invoices (\n        invoice_id      VARCHAR(255) NOT NULL,\n        contact_id    VARCHAR(255) NOT NULL,\n        organization_id    VARCHAR(255) NOT NULL,\n        total    INT(200) NOT NULL,\n        created_date  DATE DEFAULT (CURRENT_DATE),\n        PRIMARY KEY(invoice_id))").then(function () { return console.log("Table Invoice Created"); })["catch"](function (err) { return console.log(err); });
 function createInvoice(req, res) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, clientId, description, total, invoice, newInvoice, error_1;
@@ -70,7 +70,7 @@ function createInvoice(req, res) {
                 case 1:
                     newInvoice = _b.sent();
                     //Add the invoice in SQL
-                    return [4 /*yield*/, addInvoice(newInvoice.data.invoice.invoice_id, clientId, total)];
+                    return [4 /*yield*/, addInvoice(newInvoice.data.invoice.invoice_id, clientId, total, req.organizationId)];
                 case 2:
                     //Add the invoice in SQL
                     _b.sent();
@@ -94,7 +94,7 @@ function allInvoices(req, res) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, new zohoApi_1.ZohoApi(req.token).getAllInvoices("invoices")];
+                    return [4 /*yield*/, new zohoApi_1.ZohoApi(req.token, req.organizationId).getAllInvoices("invoices")];
                 case 1:
                     invoicesInfo = _a.sent();
                     res.send(invoicesInfo.data);

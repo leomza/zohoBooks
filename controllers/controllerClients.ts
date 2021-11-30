@@ -9,6 +9,7 @@ query(
         contact_id      VARCHAR(255) NOT NULL,
         contact_name    VARCHAR(255) NOT NULL,
         company_name    VARCHAR(255) NOT NULL,
+        organization_id    VARCHAR(255) NOT NULL,
         created_date  DATE DEFAULT (CURRENT_DATE),
         PRIMARY KEY(contact_id))`
 ).then(() => console.log("Table Clients Created"))
@@ -24,7 +25,7 @@ export async function createClient(req, res) {
         //Add the client to the App Zoho Books
         const newClient = await new ZohoApi(req.token, req.organizationId).createContact("contacts", contact)
         //Add the client in SQL
-        await addClient(newClient.data.contact.contact_id, contactName, companyName);
+        await addClient(newClient.data.contact.contact_id, contactName, companyName, req.organizationId);
         res.end()
     } catch (error) {
         console.error(error);

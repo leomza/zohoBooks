@@ -26,17 +26,17 @@ const getAllClients = async () => {
   return allClients
 }
 
-const addClient = async (contactId, contactName, companyName) => {
+const addClient = async (contactId, contactName, companyName, organizationId) => {
   const addedClient = await query(
-    `INSERT INTO clients (contact_id, contact_name, company_name) VALUES ('${contactId}', '${contactName}', '${companyName}')`
+    `INSERT INTO clients (contact_id, contact_name, company_name, organization_id) VALUES ('${contactId}', '${contactName}', '${companyName}', '${organizationId}')`
   )
   return addedClient
 }
 
 //Invoices:
-const addInvoice = async (contactId, contactName, companyName) => {
+const addInvoice = async (contactId, contactName, companyName, organizationId) => {
   const addedClient = await query(
-    `INSERT INTO invoices (invoice_id, contact_id, total) VALUES ('${contactId}', '${contactName}', '${companyName}')`
+    `INSERT INTO invoices (invoice_id, contact_id, total, organization_id) VALUES ('${contactId}', '${contactName}', '${companyName}', '${organizationId}')`
   )
   return addedClient
 }
