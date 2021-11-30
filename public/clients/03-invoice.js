@@ -14,7 +14,7 @@ function redirectNewInvoice () {
 async function renderInvoices () {
   try {
     const invoicesInfo = await axios.get(`/invoices/allInvoices`)
-console.log(invoicesInfo.data);
+    console.log(invoicesInfo.data);
 
     html = invoicesInfo.data.invoices
       .map(element => {
@@ -27,6 +27,9 @@ console.log(invoicesInfo.data);
         }
       })
       .join('')
+      if (html.trim() == ''){
+        html = `<h1> Nothing to show </h1>`
+      }
     root.innerHTML = html
   } catch (error) {
     console.error(error)

@@ -36,67 +36,28 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.allClients = exports.createClient = void 0;
-require("dotenv").config();
-var zohoApi_1 = require("../apis/zohoApi");
-var _a = require("../data/datadb"), query = _a.query, addClient = _a.addClient, getAllClients = _a.getAllClients;
-//Create the table in SQL if is not exist
-query("CREATE TABLE IF NOT EXISTS clients (\n        contact_id      VARCHAR(255) NOT NULL,\n        contact_name    VARCHAR(255) NOT NULL,\n        company_name    VARCHAR(255) NOT NULL,\n        created_date  DATE DEFAULT (CURRENT_DATE),\n        PRIMARY KEY(contact_id))").then(function () { return console.log("Table Clients Created"); })["catch"](function (err) { return console.log(err); });
-function createClient(req, res) {
+exports.setOrganizationId = void 0;
+var axios_1 = require("axios");
+function setOrganizationId(req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, contactName, companyName, contact, newClient, error_1;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    _b.trys.push([0, 3, , 4]);
-                    _a = req.body, contactName = _a.contactName, companyName = _a.companyName;
-                    contact = {
-                        "contact_name": contactName,
-                        "company_name": companyName
-                    };
-                    return [4 /*yield*/, new zohoApi_1.ZohoApi(req.token, req.organizationId).createContact("contacts", contact)
-                        //Add the client in SQL
-                    ];
-                case 1:
-                    newClient = _b.sent();
-                    //Add the client in SQL
-                    return [4 /*yield*/, addClient(newClient.data.contact.contact_id, contactName, companyName)];
-                case 2:
-                    //Add the client in SQL
-                    _b.sent();
-                    res.end();
-                    return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _b.sent();
-                    console.error(error_1);
-                    res.status(500).send(error_1.message);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
-            }
-        });
-    });
-}
-exports.createClient = createClient;
-function allClients(req, res) {
-    return __awaiter(this, void 0, void 0, function () {
-        var clientsInfo, error_2;
+        var organizationId, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, new zohoApi_1.ZohoApi(req.token, req.organizationId).getAllContacts("contacts")];
+                    return [4 /*yield*/, axios_1["default"].get("https://books.zoho.eu/api/v3/organizations", { headers: { "Authorization": "Zoho-oauthtoken " + req.token } })];
                 case 1:
-                    clientsInfo = _a.sent();
-                    res.send(clientsInfo.data);
+                    organizationId = _a.sent();
+                    req.organizationId = organizationId.data.organizations[0].organization_id;
+                    next();
                     return [3 /*break*/, 3];
                 case 2:
-                    error_2 = _a.sent();
-                    console.error(error_2);
-                    res.status(500).send(error_2.message);
+                    error_1 = _a.sent();
+                    console.error(error_1);
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
         });
     });
 }
-exports.allClients = allClients;
+exports.setOrganizationId = setOrganizationId;

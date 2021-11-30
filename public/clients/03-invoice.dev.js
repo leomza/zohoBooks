@@ -31,19 +31,24 @@ function renderInvoices() {
               return "<div class=\"client__item__wrapper\">\n                      <div>Customer name: <b>".concat(element.customer_name, " </b></div>            \n                      <div>Date: <b>").concat(element.date, " </b></div>\n                      <div>Total: <b>").concat(element.currency_symbol + element.total, " </b></div>\n                  </div>");
             }
           }).join('');
+
+          if (html.trim() == '') {
+            html = "<h1> Nothing to show </h1>";
+          }
+
           root.innerHTML = html;
-          _context.next = 12;
+          _context.next = 13;
           break;
 
-        case 9:
-          _context.prev = 9;
+        case 10:
+          _context.prev = 10;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
 
-        case 12:
+        case 13:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 9]]);
+  }, null, null, [[0, 10]]);
 }

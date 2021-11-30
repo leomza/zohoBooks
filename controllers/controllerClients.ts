@@ -22,7 +22,7 @@ export async function createClient(req, res) {
             "company_name": companyName
         };
         //Add the client to the App Zoho Books
-        const newClient = await new ZohoApi(req.token).createContact("contacts", contact)
+        const newClient = await new ZohoApi(req.token, req.organizationId).createContact("contacts", contact)
         //Add the client in SQL
         await addClient(newClient.data.contact.contact_id, contactName, companyName);
         res.end()
@@ -34,7 +34,7 @@ export async function createClient(req, res) {
 
 export async function allClients(req, res) {
     try {
-        const clientsInfo = await new ZohoApi(req.token).getAllContacts("contacts")
+        const clientsInfo = await new ZohoApi(req.token, req.organizationId).getAllContacts("contacts")
         res.send(clientsInfo.data)
     } catch (error) {
         console.error(error);

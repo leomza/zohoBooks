@@ -64,7 +64,7 @@ function createInvoice(req, res) {
                         "header_name": "Testing invoices",
                         "reason": description
                     };
-                    return [4 /*yield*/, new zohoApi_1.ZohoApi(req.token).createInvoice("invoices", invoice)
+                    return [4 /*yield*/, new zohoApi_1.ZohoApi(req.token, req.organizationId).createInvoice("invoices", invoice)
                         //Add the invoice in SQL
                     ];
                 case 1:

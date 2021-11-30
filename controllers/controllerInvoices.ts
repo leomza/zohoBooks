@@ -32,7 +32,7 @@ export async function createInvoice(req, res) {
         }
 
         //Add the invoice to the App Zoho Books
-        const newInvoice = await new ZohoApi(req.token).createInvoice("invoices", invoice)
+        const newInvoice = await new ZohoApi(req.token, req.organizationId).createInvoice("invoices", invoice)
         //Add the invoice in SQL
         await addInvoice(newInvoice.data.invoice.invoice_id, clientId, total);
         res.end()

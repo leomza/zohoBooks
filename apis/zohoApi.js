@@ -40,9 +40,14 @@ exports.ZohoApi = void 0;
 var axios_1 = require("axios");
 require("dotenv").config();
 var ZohoApi = /** @class */ (function () {
-    function ZohoApi(accessToken) {
-        this.accessToken = accessToken;
+    function ZohoApi(accessToken, organizationId) {
+        this.accessToken = accessToken,
+            this.organizationId = organizationId;
     }
+    //Get organization ID
+    ZohoApi.prototype.getOrganizationId = function (endpoint) {
+        return this._requestGet(axios_1["default"].get, process.env.BASE_URL + endpoint);
+    };
     //Contacts:
     ZohoApi.prototype.getContact = function (endpoint, id) {
         return this._requestGet(axios_1["default"].get, process.env.BASE_URL + endpoint + ("/" + id));
@@ -64,7 +69,7 @@ var ZohoApi = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, method(url, body, { headers: { "Authorization": "Zoho-oauthtoken " + this.accessToken, params: { organization_id: "20079813562" } } })];
+                    case 0: return [4 /*yield*/, method(url, body, { headers: { "Authorization": "Zoho-oauthtoken " + this.accessToken, params: { organization_id: "" + this.organizationId } } })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -74,7 +79,7 @@ var ZohoApi = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, method(url, { headers: { "Authorization": "Zoho-oauthtoken " + this.accessToken, params: { organization_id: "20079813562" } } })];
+                    case 0: return [4 /*yield*/, method(url, { headers: { "Authorization": "Zoho-oauthtoken " + this.accessToken, params: { organization_id: "" + this.organizationId } } })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
